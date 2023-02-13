@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="game">
+      <input type="text" id="letter-input" placeholder="Enter a letter" />
+      <button id="submit-letter">Submit</button>
+    </div>
+
+    <script></script>
+
+    <script>
+      //tengo una lista de palabras
+      const lista = [
+        "casa",
+        "perro",
+        "gato",
+        "mesa",
+        "silla",
+        "martillo",
+        "murcielago",
+      ];
+
+      //asocio las siguientes instrucciones al elemento de html, en este caso un bloque div
+      const contenedor = document.getElementById("contenedor");
+
+      // Selecciono una palabra aleatoria de la lista
+      const palabraAleatoria = lista[Math.floor(Math.random() * lista.length)];
+
+      // creo la clase de cuadros de texto con entrada de string
+      class TextArea {
+        constructor(text) {
+          this.textarea = document.createElement("textarea");
+          this.textarea.value = text;
+          this.textarea.cols = 1;
+          this.textarea.rows = 1;
+          this.textarea.style.resize = "none";
+
+          document.body.appendChild(this.textarea);
+        }
+      }
+
+      // dada una letra, voy a comparar la letra con cada letra de la palabra seleccionada
+      let input_letter;
+      const letterInputElement = document.getElementById("letter-input");
+      const submitLetterElement = document.getElementById("submit-letter");
+      submitLetterElement.onclick = function () {
+        input_letter = letterInputElement.value;
+        console.log("letra interna: " + input_letter);
+
+        var indices = [];
+        var array = palabraAleatoria.split("");
+        idx = array.indexOf(input_letter);
+        while (idx != -1) {
+          indices.push(idx);
+          idx = array.indexOf(input_letter, idx + 1);
+        }
+        console.log(indices);
+        // [0, 2, 4]
+        // si itero en la palabra escogida, comparo la posición con los indices
+        // itero en cada letra de la palabra random
+        // var muestra = []; // esta es la lista que se mostrará en los cuadros cada vez que se compare
+
+        const muestra = Array(palabraAleatoria.length).fill("");
+        indices.forEach((i) => {
+          muestra[i] = palabraAleatoria[i];
+        });
+
+        console.log(palabraAleatoria);
+        for (let i = 0; i < palabraAleatoria.length; i++) {
+          const myTextArea = new TextArea(muestra[i]);
+        }
+      };
+    </script>
+  </body>
+</html>

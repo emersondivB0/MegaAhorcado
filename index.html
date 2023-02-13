@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 3. Crear un cuadro de texto para cada letra de la palabra seleccionada y ocultarlas -->
+    <div >
+    <!-- Aquí se mostrará la palabra oculta -->
+        <input type="text" id="hiddenWord">
+    </div>
+  
+    <!-- 4. Crear otro cuadro de texto para las letras introducidas por el usuario -->
+    <div>
+    <!-- Aquí se mostrarán las letras introducidas por el usuario -->
+        <input type="text" id="lettersGuessed">
+    </div>
+    <div id="contenedor"></div>
+
+    <script>
+        //tengo una lista de palabras
+        const lista = ["casa", "perro", "gato", "mesa", "silla", "martillo", "murciélago"];
+
+        //asocio las siguientes instrucciones al elemento de html, en este caso un bloque div
+        const contenedor = document.getElementById("contenedor");
+
+        // Selecciono una palabra aleatoria de la lista
+        const palabraAleatoria = lista[Math.floor(Math.random() * lista.length)];
+
+        // Genero la cantidad de cuadros
+        for (let i = 0; i < palabraAleatoria.length; i++) {
+            // Creo un cuadro de texto para cada letra
+            const letra = document.createElement("div");
+            letra.style.display = "inline-block";
+            letra.style.width = "30px";
+            letra.style.height = "30px";
+            letra.style.border = "1px solid black";
+            letra.style.textAlign = "center";
+            letra.style.marginRight = "10px";
+            letra.innerText = "";
+            contenedor.appendChild(letra);
+        }
+
+        // Itero sobre cada letra de la palabra generada
+        for (let i = 0; i < palabraAleatoria.length; i++) {
+            // Creo un elemento de texto para cada letra
+            const letra = document.createElement("div");
+            letra.style.display = "inline-block";
+            letra.style.width = "30px";
+            letra.style.height = "30px";
+            letra.style.border = "1px solid black";
+            letra.style.textAlign = "center";
+            letra.style.marginRight = "10px";
+            letra.innerText = palabraAleatoria[i];
+            contenedor.appendChild(letra);
+        }
+    </script>
+
+    <script>
+        // 1. Crear una lista de palabras aleatorias
+        const wordList = ['javascript', 'python', 'java', 'c++', 'ruby'];
+
+        // 2. Seleccionar una palabra al azar de la lista
+        const selectedWord = wordList[Math.floor(Math.random() * wordList.length)];
+
+        // 3. Crear un cuadro de texto para cada letra de la palabra seleccionada y ocultarlas
+        let hiddenWord = '';
+        for (let i = 0; i < selectedWord.length; i++) {
+        hiddenWord += '_';
+        }
+        document.getElementById("hiddenWord").innerHTML = hiddenWord;
+
+        // 4. Crear otro cuadro de texto para las letras introducidas por el usuario
+        let lettersGuessed = '';
+        document.getElementById("lettersGuessed").innerHTML = lettersGuessed;
+
+        // 5. Comparar las letras introducidas por el usuario con las letras de la palabra seleccionada
+        const guess = function(letter) {
+        lettersGuessed += letter;
+        let newHiddenWord = '';
+        for (let i = 0; i < selectedWord.length; i++) {
+            if (lettersGuessed.includes(selectedWord[i])) {
+            newHiddenWord += selectedWord[i];
+            } else {
+            newHiddenWord += '_';
+            }
+        }
+        hiddenWord = newHiddenWord;
+        };
+    </script>
+</body>
+</html>
